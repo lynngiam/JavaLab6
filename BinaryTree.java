@@ -59,18 +59,27 @@ public class BinaryTree {
 	    return 1 + left.nodeCount() + right.nodeCount();
     }
 
-    public int prune() {
-	// TODO: write the prune method
-	return -1;
+    public int prune() { // Lynn
+	int leftRemoved = 0;
+	if (isLeaf()) {
+	    setData(null);
+	    leftRemoved++;
+	} else {
+	    left.prune();
+	    right.prune();
+	}
+	return leftRemoved;
     }
 
-    public boolean isFull() {
-    	if (isEmpty()) return true;
-    	if (isLeaf()) return true;
-    	if ((right.isEmpty() && !left.isEmpty()) || 
-				(!right.isEmpty() && left.isEmpty())) {
-			return false;
-		}
+    public boolean isFull() { // Minh
+	// TODO: write the ifFull method
+	if (isEmpty())
+	    return true;
+	if (isLeaf())
+	    return true;
+	if ((right.isEmpty() && !left.isEmpty()) || (!right.isEmpty() && left.isEmpty())) {
+	    return false;
+	}
 	return right.isFull() && left.isFull();
     }
 
@@ -79,9 +88,13 @@ public class BinaryTree {
 	return false;
     }
 
-    public int leafCount() {
+    public int leafCount() { // Lynn
 	// TODO: write the leafCount method
-	return -1;
+	if (isLeaf()) {
+	    return 1;
+	} else {
+	    return left.leafCount() + right.leafCount();
+	}
     }
 
     public BinaryTree mirrorImage() {
@@ -102,9 +115,16 @@ public class BinaryTree {
 	}
     }
 
-    public int levelCount(int level) {
+    public int levelCount(int level) { // Lynn ; becareful of NullPointerException
 	// TODO: write the levelCount method
-	return -1;
+	if (isEmpty()) {
+	    return 0;
+	} else if (level == 0) {
+	    return 1;
+	} else {
+	    level--;
+	    return left.levelCount(level) + right.levelCount(level);
+	}
     }
 
     public int weightBalanceFactor() {
@@ -112,13 +132,20 @@ public class BinaryTree {
 	return -1;
     }
 
-    public int nodeSum() {
+    public int nodeSum() { // Lynn
 	// TODO: write the nodeSum method
-	return -1;
+	int sum = Integer.parseInt(data);
+	if (isLeaf()) {
+	    return Integer.parseInt(data);
+	} else {
+	    return sum += (left.nodeSum() + right.nodeSum());
+	}
     }
 
     public void doubles() {
+
 	// TODO: write the doubles method
+
     }
 
     public int maxPathSum() {
@@ -126,19 +153,31 @@ public class BinaryTree {
 	return -1;
     }
 
-    public String preOrder() {
+    public String preOrder() { // Lynn
 	// TODO: write the preOrder method
-	return "";
+	if (isEmpty()) {
+	    return "";
+	} else {
+	    return "" + data + left.preOrder() + right.preOrder();
+	}
     }
 
-    public String inOrder() {
+    public String inOrder() { // Lynn
 	// TODO: write the inOrder method
-	return "";
+	if (isEmpty()) {
+	    return "";
+	} else {
+	    return "" + left.inOrder() + data + right.inOrder();
+	}
     }
 
-    public String postOrder() {
+    public String postOrder() { // Lynn
 	// TODO: write the postOrder method
-	return "";
+	if (isEmpty()) {
+	    return "";
+	} else {
+	    return "" + left.inOrder() + right.inOrder() + data;
+	}
     }
 
     public String levelOrder() {
