@@ -64,9 +64,14 @@ public class BinaryTree {
 	return -1;
     }
 
-    public boolean isFull() {
-	// TODO: write the ifFull method
-	return false;
+     public boolean isFull() {
+    	if (isEmpty()) return true;
+    	if (isLeaf()) return true;
+    	if ((right.isEmpty() && !left.isEmpty()) || 
+				(!right.isEmpty() && left.isEmpty())) {
+			return false;
+		}
+	return right.isFull() && left.isFull();
     }
 
     public boolean isComplete() {
