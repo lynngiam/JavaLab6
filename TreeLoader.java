@@ -18,14 +18,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TreeLoader {
+public class TreeLoader {/*
 
     BinaryTree loadTreeFromFile(String fname) throws IOException {
 	// TODO: write the loadTreeFromFile method
 	return null;
-    }
+    }*/
 
-    public BinaryTree loadFromFile(String filename) {
+    public BinaryTree loadTreeFromFile(String filename) throws IOException{
 	File file = new File(filename);
 	Scanner input = null;
 	ArrayList<BinaryTree> treeList = new ArrayList<BinaryTree>();
