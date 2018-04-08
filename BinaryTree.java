@@ -149,8 +149,10 @@ public class BinaryTree {
     }
 
     public int maxPathSum() {
-	// TODO: write the maxPathSum method
-	return -1;
+    	if (isEmpty()) return 0;
+    	int maxSubPathSum = Math.max(left.maxPathSum(), right.maxPathSum()); 
+    	
+	return Integer.parseInt(data) + maxSubPathSum;
     }
 
     public String preOrder() { // Lynn
