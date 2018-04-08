@@ -84,8 +84,10 @@ public class BinaryTree {
     }
 
     public boolean isComplete() {
-	// TODO: write the isComplete method
-	return false;
+    	if (isEmpty()) return true;
+    	int heightDiff = right.height() - left.height();
+    	if (heightDiff > 1 || heightDiff < 0) return false;
+    	return left.isComplete() && right.isComplete();
     }
 
     public int leafCount() { // Lynn
@@ -181,8 +183,16 @@ public class BinaryTree {
     }
 
     public String levelOrder() {
-	// TODO: write the levelOrder method
-	return "";
+    	String result = "";
+		LinkedList<BinaryTree> seq = new LinkedList<BinaryTree>();
+		seq.add(this);
+		while (!seq.isEmpty()) {
+			BinaryTree current = seq.remove();
+			result += current.data + " ";
+			if (!current.left.isEmpty()) seq.add(current.left);
+			if (!current.right.isEmpty()) seq.add(current.right);
+		}		
+		return result;
     }
 
     public String toString(String indent) {
