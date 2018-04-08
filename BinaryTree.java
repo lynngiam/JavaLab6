@@ -128,8 +128,13 @@ public class BinaryTree {
     }
 
     public int weightBalanceFactor() {
-	// TODO: write the weightBalanceFactor method
-	return -1;
+    	if (isEmpty()) return 0;
+    	int currentBF = Math.abs(left.nodeCount() - right.nodeCount());
+    	
+    	int largestBF = Math.max(currentBF, left.weightBalanceFactor());
+    	largestBF = Math.max(largestBF,  right.weightBalanceFactor());
+    	
+	return largestBF;
     }
 
     public int nodeSum() { // Lynn
