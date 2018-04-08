@@ -75,8 +75,10 @@ public class BinaryTree {
     }
 
     public boolean isComplete() {
-	// TODO: write the isComplete method
-	return false;
+    	if (isEmpty()) return true;
+    	int heightDiff = right.height() - left.height();
+    	if (heightDiff > 1 || heightDiff < 0) return false;
+    	return left.isComplete() && right.isComplete();
     }
 
     public int leafCount() {
@@ -127,23 +129,31 @@ public class BinaryTree {
     }
 
     public String preOrder() {
-	// TODO: write the preOrder method
-	return "";
+		if (isEmpty()) return "";
+		return data + " " + right.preOrder() + left.preOrder();
     }
 
     public String inOrder() {
-	// TODO: write the inOrder method
-	return "";
+		if (isEmpty()) return "";
+		return right.inOrder() + data + " " + left.inOrder();
     }
 
     public String postOrder() {
-	// TODO: write the postOrder method
-	return "";
+		if (isEmpty()) return "";
+		return right.inOrder() + left.inOrder() + data + " ";
     }
 
     public String levelOrder() {
-	// TODO: write the levelOrder method
-	return "";
+    	String result = "";
+		LinkedList<BinaryTree> seq = new LinkedList<BinaryTree>();
+		seq.add(this);
+		while (!seq.isEmpty()) {
+			BinaryTree current = seq.remove();
+			result += current.data + " ";
+			if (!current.left.isEmpty()) seq.add(current.left);
+			if (!current.right.isEmpty()) seq.add(current.right);
+		}		
+		return result;
     }
 
     public String toString(String indent) {
