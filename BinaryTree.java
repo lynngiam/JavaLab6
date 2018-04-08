@@ -60,15 +60,15 @@ public class BinaryTree {
     }
 
     public int prune() { // Lynn
-	int leftRemoved = 0;
+	int leavesRemoved = 0;
 	if (isLeaf()) {
 	    setData(null);
-	    leftRemoved++;
+	    left = null;
+	    right = null;
+	    return 1;
 	} else {
-	    left.prune();
-	    right.prune();
+	    return leavesRemoved + left.prune() + right.prune();
 	}
-	return leftRemoved;
     }
 
     public boolean isFull() { // Minh
@@ -84,10 +84,8 @@ public class BinaryTree {
     }
 
     public boolean isComplete() {
-    	if (isEmpty()) return true;
-    	int heightDiff = right.height() - left.height();
-    	if (heightDiff > 1 || heightDiff < 0) return false;
-    	return left.isComplete() && right.isComplete();
+	// TODO: write the isComplete method
+	return false;
     }
 
     public int leafCount() { // Lynn
@@ -130,13 +128,8 @@ public class BinaryTree {
     }
 
     public int weightBalanceFactor() {
-    	if (isEmpty()) return 0;
-    	int currentBF = Math.abs(left.nodeCount() - right.nodeCount());
-    	
-    	int largestBF = Math.max(currentBF, left.weightBalanceFactor());
-    	largestBF = Math.max(largestBF,  right.weightBalanceFactor());
-    	
-	return largestBF;
+	// TODO: write the weightBalanceFactor method
+	return -1;
     }
 
     public int nodeSum() { // Lynn
@@ -150,16 +143,22 @@ public class BinaryTree {
     }
 
     public void doubles() {
-
 	// TODO: write the doubles method
-
+	try {
+	    if (!isEmpty()) {
+		int newData = Integer.parseInt(data) * 2;
+		setData("" + newData);
+		left.doubles();
+		right.doubles();
+	    }
+	} catch (NumberFormatException e) {
+	    System.out.println("Data is not a number.");
+	}
     }
 
     public int maxPathSum() {
-    	if (isEmpty()) return 0;
-    	int maxSubPathSum = Math.max(left.maxPathSum(), right.maxPathSum()); 
-    	
-	return Integer.parseInt(data) + maxSubPathSum;
+	// TODO: write the maxPathSum method
+	return -1;
     }
 
     public String preOrder() { // Lynn
@@ -167,7 +166,7 @@ public class BinaryTree {
 	if (isEmpty()) {
 	    return "";
 	} else {
-	    return "" + data + left.preOrder() + right.preOrder();
+	    return "" + data + " " + left.preOrder() + right.preOrder();
 	}
     }
 
@@ -176,7 +175,7 @@ public class BinaryTree {
 	if (isEmpty()) {
 	    return "";
 	} else {
-	    return "" + left.inOrder() + data + right.inOrder();
+	    return "" + left.inOrder() + data + " " + right.inOrder();
 	}
     }
 
@@ -185,21 +184,13 @@ public class BinaryTree {
 	if (isEmpty()) {
 	    return "";
 	} else {
-	    return "" + left.inOrder() + right.inOrder() + data;
+	    return "" + left.inOrder() + right.inOrder() + data + " ";
 	}
     }
 
     public String levelOrder() {
-    	String result = "";
-		LinkedList<BinaryTree> seq = new LinkedList<BinaryTree>();
-		seq.add(this);
-		while (!seq.isEmpty()) {
-			BinaryTree current = seq.remove();
-			result += current.data + " ";
-			if (!current.left.isEmpty()) seq.add(current.left);
-			if (!current.right.isEmpty()) seq.add(current.right);
-		}		
-		return result;
+	// TODO: write the levelOrder method
+	return "";
     }
 
     public String toString(String indent) {
